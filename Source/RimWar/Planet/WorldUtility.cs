@@ -8,6 +8,7 @@ using RimWar.History;
 using Verse;
 using UnityEngine;
 using HarmonyLib;
+using Verse.Noise;
 
 namespace RimWar.Planet
 {
@@ -18,6 +19,10 @@ namespace RimWar.Planet
         private static List<Pawn> tmpPawns = new List<Pawn>();
 
         private static WorldComponent_PowerTracker wcpt = null;
+
+        // Do not scan literally everything, put some arbitrary limit
+        private const int maxObjectsPerScan = 20;
+
         public static WorldComponent_PowerTracker Get_WCPT()
         {
             if (wcpt == null)
@@ -1374,7 +1379,6 @@ namespace RimWar.Planet
 
         public static List<WorldObject> GetWorldObjectsInRange(PlanetTile from, float range)
         {
-
             List<WorldObject> tmpObjects = null;
             //List<WorldObject> tmpObjects = Find.WorldObjects.AllWorldObjects;
             if (WorldObjectsHolder == null)
@@ -1399,6 +1403,10 @@ namespace RimWar.Planet
                     for (int i = 0; i < worldObjects.Count; i++)
                     {
                         PlanetTile to = worldObjects[i].Tile;
+                        
+                        if (objectsInRange.Count >= maxObjectsPerScan)
+                            break;
+
                         if (from == to)
                         {
                             objectsInRange.Add(worldObjects[i]);
