@@ -64,7 +64,7 @@ namespace RimWar.Utility
             List<Pawn> list = parms.raidStrategy.Worker.SpawnThreats(parms);
             if (list == null)
             {
-                list = PawnGroupMakerUtility.GeneratePawns(IncidentParmsUtility.GetDefaultPawnGroupMakerParms(combat, parms)).ToList();
+                list = PawnGroupMakerUtility.GeneratePawns(IncidentParmsUtility.GetDefaultPawnGroupMakerParms(combat, parms, true)).ToList();
                 if (list.Count == 0)
                 {
                     Log.Error("Got no pawns spawning raid from parms " + parms);
