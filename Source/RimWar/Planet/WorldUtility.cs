@@ -1725,46 +1725,6 @@ namespace RimWar.Planet
             return false;
         }
 
-        public static int RelativePowerCostAdjustment(int pts, RimWarData thisRWD)
-        {
-            int adjustedCost = 0;
-            List<RimWarData> rwdList = Get_WCPT().RimWarData;
-            float totalPoints= 0;
-            float totalFactions = 0;
-            float averagePoints = 0;
-            float thisFactionPts = 0;
-            float relativePower = 1f;
-            
-            if(rwdList != null && rwdList.Count > 0)
-            {
-                for(int i = 0; i < rwdList.Count; i++)
-                {
-                    RimWarData rwd = rwdList[i];
-                    if(rwd.behavior != RimWarBehavior.Player && rwd.behavior != RimWarBehavior.Vassal && rwd.behavior != RimWarBehavior.Undefined && rwd.behavior != RimWarBehavior.Excluded)
-                    {
-                        totalFactions++;
-                        totalPoints += rwd.TotalFactionPoints;
-                        if(thisRWD.RimWarFactionKey == rwd.RimWarFactionKey)
-                        {
-                            thisFactionPts = rwd.TotalFactionPoints;
-                        }
-                    }
-                }
-
-                if (totalFactions != 0)
-                {
-                    averagePoints = totalPoints / totalFactions;
-                    if (averagePoints != 0)
-                    {
-                        relativePower = Mathf.Clamp(thisFactionPts / averagePoints, .75f, 1.25f);
-                        adjustedCost = Mathf.RoundToInt(relativePower * pts);
-                    }
-                }
-            }
-            
-            return Mathf.RoundToInt(adjustedCost/2f);
-        }
-
         public static WorldObject ReturnCloserWorldObjectTo(WorldObject wo1, WorldObject wo2, PlanetTile to)
         {
             float d1 = Find.WorldGrid.ApproxDistanceInTiles(wo1.Tile, to);
