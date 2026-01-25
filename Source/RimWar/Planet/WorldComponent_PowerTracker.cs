@@ -203,7 +203,6 @@ namespace RimWar.Planet
             }
             if (currentTick % 60 == 0)
             {
-                CheckForNewFactions();
                 AdjustCaravanTargets();
             }
             if(currentTick % (int)settingsRef.heatFrequency == 0)
@@ -212,6 +211,9 @@ namespace RimWar.Planet
             }
             if (currentTick % settingsRef.rwdUpdateFrequency == 0)
             {
+                // Update existing factions before update
+                CheckForNewFactions();
+
                 if (Options.Settings.Instance.threadingEnabled)
                 {
                     tasker.Register(() =>
@@ -460,9 +462,30 @@ namespace RimWar.Planet
             this.caravanTargetData.Add(ctd);
         }
 
+        private static int CountOnPlanetFactions()
+        {
+            List<Faction> factionList = Find.World.factionManager.AllFactionsVisible.ToList();
+            int count = factionList.Count;
+
+            for (int i = 0; i < factionList.Count; i++)
+            {
+                /* AllFactionsVisible does ignore standard hidden factions,
+                 * but Traders Guild (guys in space) are not hidden,
+                 * but outside standard calculations.
+                 * So we need to ignore them manually.
+                 */
+                if (factionList[i] == Faction.OfTradersGuild)
+                {
+                    count--;
+                }
+            }
+
+            return count;
+        }
+
         public void CheckForNewFactions()
         {
-            if(Find.World.factionManager.AllFactionsVisible.ToList().Count > this.RimWarData.Count)
+            if(WorldComponent_PowerTracker.CountOnPlanetFactions() > this.RimWarData.Count)
             {
                 Utility.RimWar_DebugToolsPlanet.ResetFactions(false, true);
             }
