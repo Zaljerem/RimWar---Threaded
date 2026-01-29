@@ -34,7 +34,7 @@ namespace RimWar.Planet
                     if (cp != null)
                     {
                         return cp;
-                        wcpt = cp; // why does the world component get initialized twice?  this is leading to an empty world component and many manay bugs... for now, return the first component
+                        //wcpt = cp; // why does the world component get initialized twice?  this is leading to an empty world component and many manay bugs... for now, return the first component
                     }
                 }
             }
@@ -1391,13 +1391,6 @@ namespace RimWar.Planet
             if (tmpObjects != null && tmpObjects.Count > 0)
             {
                 List<WorldObject> worldObjects = tmpObjects.InRandomOrder().ToList();
-                //List<WorldObject> tmpObjects = Find.WorldObjects.AllWorldObjects;
-                //if (WorldObjectsHolder == null)
-                //    CopyData();
-                //lock (locker)
-                //{
-                //    worldObjects = WorldObjectsHolder.InRandomOrder().ToList();
-                //}
                 if (worldObjects != null)
                 {                    
                     for (int i = 0; i < worldObjects.Count; i++)

@@ -755,13 +755,7 @@ namespace RimWar.Planet
                         if (rwdTown != null)
                         {
                             int maxPts = 50000;
-                            //if (rwd.behavior == RimWarBehavior.Vassal)
-                            //{
-                            //    if(ModCheck.Empire.FactionFC_ComponentCheck(rwdTown.parent.Tile))
-                            //    {
-                            //        maxPts = ModCheck.Empire.FactionFC_SettlementLevel(rwdTown.parent.Tile);
-                            //    }
-                            //}
+                            
                             if (rwdTown.parent.def.defName == "City_Citadel")
                             {
                                 maxPts += 5000;
@@ -814,20 +808,6 @@ namespace RimWar.Planet
                             }
                         }
                     }
-                    //for(int j =0; j < rwd.FactionObjects.Count; j++) // no longer needed
-                    //{
-                    //    RimWarSettlementComp rwsc = rwd.FactionObjects[j].GetComponent<RimWarSettlementComp>();
-                    //    if(rwsc != null && rwsc.parent.def.defName == "FactionBaseGenerator") //Empire mod
-                    //    {
-                    //        int maxPts = 10000;
-                    //        if (rwsc.RimWarPoints <= maxPts)
-                    //        {
-                    //            float pts = (Rand.Range(1f, 2f)) + WorldUtility.GetBiomeMultiplier(Find.WorldGrid[rwsc.parent.Tile].biome); //.1f - 3.5f
-                    //            pts = pts * mult * WorldUtility.GetFactionTechLevelMultiplier(rwd.RimWarFaction) * rwd.growthAttribute;
-                    //            rwsc.RimWarPoints += Mathf.RoundToInt(Mathf.Clamp(pts, 1f, 100f));
-                    //        }
-                    //    }
-                    //}
                 }
 
                 if(rwd.behavior == RimWarBehavior.Vassal)
@@ -2212,13 +2192,6 @@ namespace RimWar.Planet
                     else
                     {
                         return;
-                        //Trader tdr = WorldUtility.CreateTrader(maxPts, rwd, rwsComp.parent as RimWorld.Planet.Settlement, rwsComp.parent.Tile, targetTown, WorldObjectDefOf.Settlement);
-                        //rwsComp.RimWarPoints = rwsComp.RimWarPoints - WorldUtility.RelativePowerCostAdjustment(maxPts, rwd);
-                        //if (targetTown.Faction == Faction.OfPlayer)
-                        //{
-                        //    rwsComp.PlayerHeat = 0;
-                        //    minimumHeatForPlayerAction += GetHeatForAction(RimWarAction.Caravan);
-                        //}
                     }
                 }
             }
