@@ -68,6 +68,8 @@ namespace RimWar.Planet
             }
             if (moving && curPath != null && this.destTile == destTile)
             {
+                curPath.ReleaseToPool();
+                curPath = null;
                 return true;
             }
             if (!Find.WorldReachability.CanReach(warObject.Tile, destTile))
@@ -90,8 +92,8 @@ namespace RimWar.Planet
             if (curPath != null)
             {
                 curPath.ReleaseToPool();
+                curPath = null;
             }
-            curPath = null;
             moving = true;
             if (repathImmediately && TrySetNewPath() && nextTileCostLeft <= 0f && moving)
             {
