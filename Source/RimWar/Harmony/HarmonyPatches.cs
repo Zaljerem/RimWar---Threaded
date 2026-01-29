@@ -919,7 +919,7 @@ namespace RimWar.Harmony
 
             if (___paths.Count > caravanCount + 2 + (Find.WorldObjects.RoutePlannerWaypointsCount - 1))
             {
-                Log.ErrorOnce(string.Format("WorldPathPool leak: more paths ({0}) than caravans ({1}). Force-recovering.",
+                Log.WarningOnce(string.Format("WorldPathPool leak: more paths ({0}) than caravans ({1}). Force-recovering.",
                     ___paths.Count, caravanCount + 2 + (Find.WorldObjects.RoutePlannerWaypointsCount - 1)), 664788);
                 ___paths.Clear();
             }
