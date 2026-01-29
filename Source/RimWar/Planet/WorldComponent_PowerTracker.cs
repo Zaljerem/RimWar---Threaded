@@ -2266,7 +2266,7 @@ namespace RimWar.Planet
 
         public void AttemptTradeMission(RimWarData rwd, RimWorld.Planet.Settlement parentSettlement, RimWarSettlementComp rwsComp, bool forcePlayer = false, bool ignoreRestrictions = false)
         {
-            if (Options.Settings.Instance.threadingEnabled)
+            if (false) //Options.Settings.Instance.threadingEnabled)
             {
                 if (rwd != null && rwsComp != null && parentSettlement != null)
                 {
@@ -2308,10 +2308,10 @@ namespace RimWar.Planet
                 if (rwd != null && rwsComp != null && parentSettlement != null)
                 {
                     Options.SettingsRef settingsRef = new Options.SettingsRef();
-                    if (rwsComp.RimWarPoints > 200 || ignoreRestrictions)
-                    {
+                    //if (rwsComp.RimWarPoints > 200 || ignoreRestrictions)
+                    //{
                         this.AttemptTradeMission_UnThreaded(rwd, parentSettlement, rwsComp, forcePlayer, ignoreRestrictions);
-                    }
+                    //}
                 }
                 else
                 {
